@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +29,7 @@ use App\Http\Controllers\LogoutController;
  */
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
-Route::get('/detail/{slug}', [FrontendController::class, 'detail'])->name('index');
+Route::get('/detail/{slug}', [FrontendController::class, 'detail'])->name('detail');
 
 Route::group(['middleware' => ['guest']], function () {
     /**
@@ -44,7 +49,11 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * Logout Routes
      */
-    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.perform');
+    Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
+    Route::resource('cart', CartController::class);
+    Route::resource('orders', OrderController::class);
+    Route::get('checkout', [UserController::class,'checkout'])->name('checkout');
+    //Route::post('buynow', [UserController::class,'buynow'])->name('buynow');
 });
 
 

@@ -47,4 +47,15 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function cart(){
+        return $this->belongsToMany(Product::class,'carts')->withPivot('quantity','id');
+    }
+    public function address(){
+        return $this->hasOne(UserAddress::class);
+    }
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
+
 }

@@ -1,5 +1,7 @@
 @extends('layouts.app-master')
+@section('style')
 
+@endsection
 @section('content')
     @include('layouts.partials.carousel')
     <div class="bg-light p-5 rounded">
@@ -58,21 +60,20 @@
         <div class="card-group">
             @foreach ($products as $item)
                 <div class="card">
-                    <a href="#"><img class="card-img-top" src="{{ $item->gallery }}" alt="Card image cap"
-                            height="250vh" width="250vw">
+                    <a href="{{ route('detail', $item->slug) }}"><img class="card-img-top" src="{{ $item->gallery }}"
+                            alt="Card image cap" height="250vh" width="250vw">
                         <div class="card-body">
                             <h5 class="card-title">{{ $item->name }}</h5>
-                            <p class="card-text" style="color: black">This is a wider card with supporting text below as a natural lead-in to
+                            <p class="card-text" style="color: black">This is a wider card with supporting text below as a
+                                natural lead-in to
                                 additional content. This content is a little bit longer.</p>
                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
                     </a>
-
-
                 </div>
             @endforeach
             <div class="card">
-                <img  class="card-img-top" src="{{ $products[1]->gallery }}" alt="Card image cap" height="250vh"
+                <img class="card-img-top" src="{{ $products[1]->gallery }}" alt="Card image cap" height="250vh"
                     width="250vw">
                 <div class="card-body">
                     <h5 class="card-title">{{ $products[1]->name }}</h5>
@@ -83,4 +84,9 @@
             </div>
         </div>
     </div>
+
+@endsection
+@section('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 @endsection

@@ -1,7 +1,88 @@
-@extends('layouts.auth-master')
+@extends('layouts.app-master')
+@section('style')
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+        }
+
+        .content {
+            margin: 8%;
+            background-color: #fff;
+            padding: 4rem 1rem 4rem 1rem;
+            box-shadow: 0 0 5px 5px rgba(0, 0, 0, .05);
+        }
+        .signin-text {
+            font-style: normal;
+            font-weight: 600 !important;
+        }
+        .form-control {
+            display: block;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            border-color: #00ac96 !important;
+            border-style: solid !important;
+            border-width: 0 0 1px 0 !important;
+            padding: 0px !important;
+            color: #495057;
+            height: auto;
+            border-radius: 0;
+            background-color: #fff;
+            background-clip: padding-box;
+        }
+
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #fff;
+            outline: 0;
+            box-shadow: none;
+        }
+
+        .birthday-section {
+            padding: 15px;
+        }
+
+        .btn-class {
+            border-color: #00ac96;
+            color: #00ac96;
+        }
+
+        .btn-class:hover {
+            background-color: #00ac96;
+            color: #fff;
+        }
+    </style>
+@endsection
 @section('content')
-    <form method="post" action="{{ route('register.perform') }}">
+    <div class="container">
+        <div class="row content">
+            @include('auth.partials.truefriends')
+            <div class="col-md-6">
+                <h3 class="signin-text mb-3"> Sign In</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="checkbox" class="form-check-input" id="checkbox">
+                        <label class="form-check-label" for="checkbox">Remember Me</label>
+                    </div>
+                    <button class="btn btn-class">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- <form method="post" action="{{ route('register.perform') }}">
         @csrf
 
         <img class="mb-4" src="{!! url('images/bootstrap-logo.svg') !!}" alt="" width="72" height="57">
@@ -55,5 +136,5 @@
         <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 
         @include('auth.partials.copy')
-    </form>
+    </form> --}}
 @endsection

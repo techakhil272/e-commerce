@@ -35,6 +35,22 @@
             font-family: Roboto, Arial, sans-serif;
         }
 
+        ._3SkBxJ .KK-o3G {
+            position: absolute;
+            left: 18px;
+            top: -14px;
+            text-align: center;
+            border-radius: 7px;
+            width: 18px;
+            height: 18px;
+            background-color: #ff6161;
+            border: 1px solid #fff;
+            font-weight: 400;
+            color: #f0f0f0;
+            line-height: 16px;
+            font-size: 12px;
+        }
+
         a:-webkit-any-link {
             cursor: pointer;
         }
@@ -58,41 +74,10 @@
             margin: 0 8px;
         }
 
-        .custom-product {
-            height: 600px
-        }
-
-        .slider-text {
-            background-color: #35443585 !important;
-        }
-
-        .trending-image {
-            height: 100px;
-        }
-
-        .trening-item {
-            float: left;
-            width: 20%;
-        }
-
-        .trending-wrapper {
-            margin: 30px;
-        }
-
         .detail-img {
-            height: 200px;
+            height: 40vh;
+            padding: 10px;
         }
-
-        .search-box {
-            width: 500px !important
-        }
-
-        .cart-list-devider {
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 20px;
-            padding-bottom: 20px
-        }
-
 
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
@@ -100,7 +85,9 @@
             }
         }
     </style>
+    @yield('style')
     <!-- Custom styles for this template -->
+    <link rel="icon" href="{{asset("assets/logo/akirulogo.png")}}" type="image/icon type">
     <link href="{!! url('assets/css/app.css') !!}" rel="stylesheet">
 </head>
 
@@ -111,7 +98,7 @@
 
     {{ View::make('layouts.partials.footer') }}
     <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
-
+    @yield('js')
 </body>
 
 </html>
