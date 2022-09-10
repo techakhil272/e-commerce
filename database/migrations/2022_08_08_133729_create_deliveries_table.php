@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['NS','DP','OD','DL'])->default('DP')->nullable();
+            $table->enum('status', ['C','NS','ND','OD','DL'])->default('ND')->nullable();
             $table->string('name')->default('Not Delivered')->nullable();
             $table->string('slug')->default('not-delivered')->nullable();
             $table->date('date')->nullable();

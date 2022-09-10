@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('seller_id');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
-            $table->unsignedBigInteger('category_id');  
+            $table->string('status')->nullable();
+            $table->unsignedBigInteger('category_id');
             $table->string('price')->nullable();
             $table->string('stock')->nullable();
             $table->string('docs')->nullable();
@@ -26,7 +27,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('details')->nullable();
             $table->text('gallery')->nullable();
-            $table->string('ratings')->nullable();
+            $table->json('related')->nullable();
+            $table->json('tags')->nullable();
+            $table->json('media')->nullable();
+            $table->string('ratings')->default('5')->nullable();
             $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

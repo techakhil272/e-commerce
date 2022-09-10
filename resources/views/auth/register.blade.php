@@ -9,15 +9,17 @@
         }
 
         .content {
-            margin: 8%;
+            margin: 2%;
             background-color: #fff;
             padding: 4rem 1rem 4rem 1rem;
             box-shadow: 0 0 5px 5px rgba(0, 0, 0, .05);
         }
+
         .signin-text {
             font-style: normal;
             font-weight: 600 !important;
         }
+
         .form-control {
             display: block;
             width: 100%;
@@ -61,23 +63,55 @@
 @section('content')
     <div class="container">
         <div class="row content">
+            {{-- @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+            </div>
+            @endif --}}
             @include('auth.partials.truefriends')
             <div class="col-md-6">
-                <h3 class="signin-text mb-3"> Sign In</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control">
+                @include('layouts.partials.messages')
+                <h3 class="signin-text mb-3"> Sign UP </h3>
+                <form method="post" action="{{ route('register.perform') }}">
+                    @csrf
+                    <div class="form-group my-3">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}"
+                            placeholder="" required="required" autofocus>
+                        @if ($errors->has('email'))
+                            <span class="text-danger text-left">{{ $errors->first('email') }}</span>
+                        @endif
                     </div>
-                    <div class="form-group">
+                    <div class="form-group my-3">
+                        <label for="number">Phone Number</label>
+                        <input type="number" class="form-control" name="number" id="number" value="{{ old('number') }}"
+                            placeholder="" required="required" autofocus>
+                        @if ($errors->has('number'))
+                            <span class="text-danger text-left">{{ $errors->first('number') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username"
+                            value="{{ old('username') }}" placeholder="" required="required" autofocus>
+                        @if ($errors->has('username'))
+                            <span class="text-danger text-left">{{ $errors->first('username') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group my-3">
                         <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" class="form-control" name="password" id="password"
+                            value="{{ old('password') }}" placeholder="" required="required">
+                        @if ($errors->has('password'))
+                            <span class="text-danger text-left">{{ $errors->first('password') }}</span>
+                        @endif
                     </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" name="checkbox" class="form-check-input" id="checkbox">
-                        <label class="form-check-label" for="checkbox">Remember Me</label>
+                    <div class="form-group my-3">
+                        <button class="btn btn-class">Register</button>
+                        <a href="{{route('login.show')}}"><button type="button" class="btn btn-class mx-2">Existing User? Sign In</button></a>
+
+                        @include('auth.partials.copy')
                     </div>
-                    <button class="btn btn-class">Login</button>
                 </form>
             </div>
         </div>

@@ -8,7 +8,6 @@ use App\Models\Delivery;
 use App\Models\DeliveryAddress;
 use App\Models\Invoice;
 use App\Models\Payment;
-
 use App\Models\OrderDetails;
 use App\Models\UserAddress;
 use App\Models\Cart;
@@ -60,7 +59,7 @@ class OrderController extends Controller
         $shipping->user_id = Auth::user()->id;
         $shipping->save();
         $delivery = new Delivery();
-        $delivery->status = 'DP';
+        $delivery->status = 'ND';
         $delivery->name = 'Not Delivered';
         $delivery->slug = 'not-delivered';
         $delivery->order_id = $order->id;
@@ -69,7 +68,7 @@ class OrderController extends Controller
         $payment = new Payment();
         $payment->status = 'PENDING';
         $payment->method = $request->paymentMethod;
-        $payment->method = Str::slug($request->paymentMethod);
+        $payment->method_slug = Str::slug($request->paymentMethod);
         $payment->method_name = 'Cash On Delivery';
         $payment->total = $request->total;
         //$payment->date = $request->date;
@@ -89,8 +88,8 @@ class OrderController extends Controller
             $order_detail->product_id = $value->id;
             $order_detail->pname = $value->name;
             $order_detail->price = $value->price;
-            $order_detail->quantity = $value->pivot->quantity;
-            $order_detail->product_total = ($value->pivot->quantity) * ($value->price);
+            $order_detail->quantity = 1;
+            $order_detail->product_total = ($value->price);
             $order_detail->order_id = $order->id;
             $order_detail->user_id = Auth::user()->id;
             $order_detail->shipping_id = $shipping->id;
@@ -98,7 +97,14 @@ class OrderController extends Controller
             $order_detail->payment_id = $payment->id;
             $order_detail->invoice_id = $invoice->id;
             $order_detail->save();
-            Cart::where('product_id', $value->id)->delete();
+
+            $cart = Cart::where('product_id', $value->id)->where('user_id', Auth::user()->id)->first();
+            if ($cart->quantity > 1) {
+                $cart->decrement('quantity');
+            } else {
+                $cart->delete();
+            }
+            $value->decrement('stock');
         } else {
             foreach ((Auth::user()->cart) as $value) {
                 $order_detail = new OrderDetails();
@@ -114,7 +120,8 @@ class OrderController extends Controller
                 $order_detail->payment_id = $payment->id;
                 $order_detail->invoice_id = $invoice->id;
                 $order_detail->save();
-                Cart::where('product_id', $value->id)->delete();
+                Cart::where('product_id', $value->id)->where('user_id', Auth::user()->id)->delete();
+                $value->decrement('stock',$value->pivot->quantity);
             }
         }
         $delivery_address = new DeliveryAddress();
@@ -157,7 +164,11 @@ class OrderController extends Controller
                 $useradd->save();
             }
         }
-        return "saved";
+        if ($payment->method == "CARD") {
+            session()->put('card_payment', $order);
+            return redirect('stripe');
+        }
+        return redirect('orders');
     }
 
     /**

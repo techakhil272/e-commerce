@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
 
 <head>
@@ -11,7 +10,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{!! url('assets/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet">
-
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -73,22 +72,12 @@
             height: 16px;
             margin: 0 8px;
         }
-
-        .detail-img {
-            height: 40vh;
-            padding: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
     </style>
-    @yield('style')
+
     <!-- Custom styles for this template -->
-    <link rel="icon" href="{{asset("assets/logo/akirulogo.png")}}" type="image/icon type">
+    <link rel="icon" href="{{ asset('assets/logo/akirulogo.png') }}" type="image/icon type">
     <link href="{!! url('assets/css/app.css') !!}" rel="stylesheet">
+    @yield('style')
 </head>
 
 <body>
@@ -100,5 +89,34 @@
     <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
     @yield('js')
 </body>
+{{-- <script src="https://code.jquery.com/jquery-3.6.1.js" ></script> --}}
+<script>
+    var loc = "{{ Request::url() }}";
+    //alert(loc)
+    var li = document.querySelectorAll('#navbar a');
+    li.forEach(function(element, index) {
+
+        if (window.location.href == element.getAttribute("href")) {
+            alert(element.getAttribute("href"));
+            element.classList.remove("text-white");
+            element.classList.add("text-secondary");
+        } else {
+            element.classList.remove("text-secondary");
+            element.classList.add("text-white");
+        }
+    });
+    // $('#navbar').find('a').each(function() {
+    //     console.log($(this).attr('href'));
+
+    //     if ($(this).attr('href') == loc) {
+    //         $(this).removeClass('text-white');
+    //         $(this).addClass('text-secondary');
+    //     } else {
+    //         $(this).removeClass('text-secondary');
+    //         $(this).addClass('text-white');
+    //     }
+    // });
+    // console.log(loc);
+</script>
 
 </html>

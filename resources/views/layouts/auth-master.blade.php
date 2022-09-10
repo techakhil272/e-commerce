@@ -1,4 +1,4 @@
-<!doctype html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{!! url('assets/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet">
     <link href="{!! url('assets/css/signin.css') !!}" rel="stylesheet">
-
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;

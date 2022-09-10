@@ -173,6 +173,7 @@
             content: 'Out For Delivery';
             /* left: -10px; */
         }
+
         #step-6::after {
             content: 'Delivered';
             left: -10px;
@@ -258,7 +259,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 @endsection
 @section('content')
     <div class="container mt-4">
@@ -302,23 +303,24 @@
                             <div class="order my-3 bg-light">
                                 <div class="row">
                                     <div class="col-lg-2">
-                                        <img class="media-object"
-                                            src="{{$item->product->gallery}}"
+                                        <img class="media-object" src="{{ $item->product->gallery }}"
                                             style="width: 80%; height: 80%;" />
                                         <div class="d-flex align-items-center pt-1">
-                                            <div class="text-uppercase">{{$item->pname}}</div>
+                                            <div class="text-uppercase">{{ $item->pname }}</div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-3">
                                         <div class="d-flex flex-column justify-content-between order-summary">
                                             <div class="d-flex align-items-center">
-                                                <div class="text-uppercase">Order #{{$item->order->id}}</div>
-                                                <div class="blue-label ms-auto text-uppercase">{{$item->order->payment->method}}</div>
-                                                <span class="badge badge-danger ml-1">{{$item->order->payment->status}}</span>
+                                                <div class="text-uppercase">Order #{{ $item->order->id }}</div>
+                                                <div class="blue-label ms-auto text-uppercase">
+                                                    {{ $item->order->payment->method }}</div>
+                                                <span
+                                                    class="badge badge-danger ml-1">{{ $item->order->payment->status }}</span>
                                             </div>
-                                            <div class="fs-8">Products #{{$item->product->id}}</div>
-                                            <div class="fs-8">{{$item->created_at->diffForHumans()}}</div>
+                                            <div class="fs-8">Products #{{ $item->product->id }}</div>
+                                            <div class="fs-8">{{ $item->created_at->diffForHumans() }}</div>
                                             <div class="rating d-flex align-items-center pt-1">
                                                 <img src="https://www.freepnglogos.com/uploads/like-png/like-png-hand-thumb-sign-vector-graphic-pixabay-39.png"
                                                     alt=""><span class="px-2">Rating:</span>
@@ -332,32 +334,34 @@
                                     </div>
                                     <div class="col-lg-7">
                                         <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
-                                            <div class="status">Status : Delivered</div>
+                                            <div class="status">Status : {{ $value->delivery->name }}</div>
                                             <div class="btn btn-primary text-uppercase">order info</div>
                                         </div>
-                                        <div class="progressbar-track">
-                                            <ul class="progressbar">
-                                                <li id="step-1" class="text-muted green">
-                                                    <span class="fas fa-gift"></span>
-                                                </li>
-                                                <li id="step-2" class="text-muted green">
-                                                    <span class="fas fa-check"></span>
-                                                </li>
-                                                <li id="step-3" class="text-muted green">
-                                                    <span class="fas fa-box"></span>
-                                                </li>
-                                                <li id="step-4" class="text-muted green">
-                                                    <span class="fas fa-truck"></span>
-                                                </li>
-                                                <li id="step-5" class="text-muted green">
-                                                    <span class="fas fa-motorcycle"></span>
-                                                </li>
-                                                <li id="step-6" class="text-muted green">
-                                                    <span class="fas fa-box-open"></span>
-                                                </li>
-                                            </ul>
-                                            <div id="tracker"></div>
-                                        </div>
+                                        @if ($value->delivery->status != 'C')
+                                            <div class="progressbar-track">
+                                                <ul class="progressbar">
+                                                    <li id="step-1" class="text-muted green">
+                                                        <span class="fas fa-gift"></span>
+                                                    </li>
+                                                    <li id="step-2" class="text-muted green">
+                                                        <span class="fas fa-check"></span>
+                                                    </li>
+                                                    <li id="step-3" class="text-muted green">
+                                                        <span class="fas fa-box"></span>
+                                                    </li>
+                                                    <li id="step-4" class="text-muted {{($value->shipping->status)=="S" ? "green":""}}">
+                                                        <span class="fas fa-truck"></span>
+                                                    </li>
+                                                    <li id="step-5" class="text-muted {{((($value->shipping->status)=="S") && (($value->delivery->status=="OD") || ($value->delivery->status=="DL")))? "green" : ""}}">
+                                                        <span class="fas fa-motorcycle"></span>
+                                                    </li>
+                                                    <li id="step-6" class="text-muted {{((($value->shipping->status)=="S") && (($value->delivery->status)=="DL"))? "green" : ""}}">
+                                                        <span class="fas fa-box-open"></span>
+                                                    </li>
+                                                </ul>
+                                                <div id="tracker"></div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -367,10 +371,9 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('js')
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 @endsection

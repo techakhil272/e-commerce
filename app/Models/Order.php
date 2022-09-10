@@ -21,7 +21,7 @@ class Order extends Model
     {
         return $this->hasOne(Payment::class);
     }
-    public function invoices()
+    public function invoice()
     {
         return $this->hasOne(Invoice::class);
     }
