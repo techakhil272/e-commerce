@@ -44,11 +44,10 @@
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <!-- Content -->
             <h6 class="text-uppercase fw-bold mb-4">
-              <i class="fas fa-gem me-3"></i>Company name
+              <i class="fas fa-gem me-3"></i>Akiru Ventures
             </h6>
             <p>
-              Here you can use rows and columns to organize your footer content. Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit.
+              Website Developing Company since 2020
             </p>
           </div>
           <!-- Grid column -->
@@ -60,16 +59,16 @@
               Products
             </h6>
             <p>
-              <a href="#!" class="text-reset">Angular</a>
+              <a href="#!" class="text-reset">E-Commerce</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">React</a>
+              <a href="#!" class="text-reset">Market Place</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Vue</a>
+              <a href="#!" class="text-reset">Portfolio</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Laravel</a>
+              <a href="#!" class="text-reset">Marketing Websites</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -101,13 +100,13 @@
             <h6 class="text-uppercase fw-bold mb-4">
               Contact
             </h6>
-            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-home me-3"></i> Wadala, Mumbai-400037, IN</p>
             <p>
               <i class="fas fa-envelope me-3"></i>
-              info@example.com
+              info@akiruventures
             </p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+            <p><i class="fas fa-phone me-3"></i> +91 9833058442</p>
+            <p><i class="fas fa-print me-3"></i> +91 9833058442</p>
           </div>
           <!-- Grid column -->
         </div>
@@ -119,7 +118,7 @@
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
       © 2021 Copyright:
-      <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      <a class="text-reset fw-bold" href="https://mdbootstrap.com/">Akiru Ventures</a>
     </div>
     <!-- Copyright -->
   </footer>

@@ -470,7 +470,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="fw-bold text-end">
-                                                        <a href="../../invoices/view/invoice-3.html"
+                                                        <a href="{{route('admin.invoice',$order->id)}}"
                                                             class="text-gray-600 text-hover-primary">#INV-{{ $order->invoice->id }}</a>
                                                     </td>
                                                 </tr>
